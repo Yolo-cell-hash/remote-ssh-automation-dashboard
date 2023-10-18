@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+<body>
+    <div class="container1 container">
+        <form method="post" action="/">
+          <div class="brand-logo"></div>
+          <div class="brand-title">FLY before <br> you BUY</div>
+        
+          <div class="inputs">
+            <label>Username </label>
+            <input autocomplete="off" name="client_uname" type="text" placeholder="root" />
+          </div>  
+
+          <div class="inputs">
+            <label>Password </label>
+            <input autocomplete="off" name="client_pass" type="password" placeholder="password" />
+          </div> 
+
+          <div class="inputs">
+            <label>Your IP Address </label>
+            <input autocomplete="off" name="client_ip" type="text" placeholder="172.168.1.12" />
+          </div> 
+            <button type="submit">Connect</button>
+        </form>   
+    </div>    
+</body>   
+
+<%- include('partials/footer') %>
