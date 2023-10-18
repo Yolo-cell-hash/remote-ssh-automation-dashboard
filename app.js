@@ -27,20 +27,32 @@ app.post('/', (req, res) => {
     console.log("Uname: " + client_uname);
     console.log("Client IP: " + client_ip);
 
-    // Update this with the actual path to your AWS private key
     const privateKeyPath = './secret-public-key.pem';
-    
     const conn = new Client();
 
     conn.on('ready', () => {
         console.log('SSH Connection Established');
-        conn.shell((err, stream) => {
+        
+        // Run your command on the server
+        conn.exec('bash demo-script.sh', (err, stream) => {
             if (err) throw err;
+
+            // Capture the command output
+            let commandOutput = '';
+            stream.on('data', (data) => {
+                commandOutput += data;
+            });
+
             stream.on('close', () => {
-                console.log('SSH Connection Closed');
+                console.log('Command Executed');
+                console.log('Command Output:');
+                console.log(commandOutput);
+
+                // Close the SSH connection
                 conn.end();
-            }).on('data', (data) => {
-                res.send(`<pre>${data}</pre>`);
+
+                // Send the command output as a response
+                res.send(`<pre>${commandOutput}</pre>`);
             });
         });
     }).on('error', (err) => {
