@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', (req, res) => {
-    const client_uname = req.body.client_uname;
+    const client_uname = 'ubuntu';
     const client_ip = req.body.client_ip;
 
     if (client_ip.length === 0 || client_uname.length === 0) {
@@ -34,7 +34,7 @@ app.post('/', (req, res) => {
         console.log('SSH Connection Established');
         
         // Run your command on the server
-        conn.exec('bash demo-script.sh', (err, stream) => {
+        conn.exec('./demo.sh', (err, stream) => {
             if (err) throw err;
 
             // Capture the command output
