@@ -34,7 +34,7 @@ app.post('/', (req, res) => {
         console.log('SSH Connection Established');
         
         // Run your command on the server
-        conn.exec('./demo.sh', (err, stream) => {
+        conn.exec('roslaunch plutoserver drone_comb.launch', (err, stream) => {
             if (err) throw err;
 
             // Capture the command output
